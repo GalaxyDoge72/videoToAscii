@@ -1,7 +1,9 @@
 a video converter for ascii text lol
 
 to use this repo correctly you must:
+first download the repository
 
+to convert a video:
 1. place your video in the folder
 2. run "videoExtract.py" wait for it to finish
 (Note: if an FFMPEG error shows, ignore it. This is planned to be part of the audio.)
