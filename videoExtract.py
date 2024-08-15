@@ -31,6 +31,7 @@ while True:
 
 import subprocess
 command = f"ffmpeg -i '{video_path}' -vn -c:a pcm_s16le output.wav"
+print(command)
 subprocess.run(command)
 
 cap.release()

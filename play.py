@@ -1,7 +1,10 @@
 import os
 import re
 import time
-
+from just_playback import Playback
+from tkinter import filedialog
+import cv2
+playback = Playback()
 def sort_files_by_number(directory):
 
   files = []
@@ -17,20 +20,19 @@ def sort_files_by_number(directory):
   return [f[1] for f in sorted(files)]  # Extract file paths from sorted list
 
 def display_file_content(file_paths):
-  """Clears the screen and displays the content of each file in sorted order.
-
-  Args:
-    file_paths: A list of file paths in sorted order.
-  """
-
+  video_path = str(filedialog.askopenfilename())
+  cap = cv2.VideoCapture(video_path)
+  fps = cap.get(cv2.CAP_PROP_FPS)
+  playback.load_file('output.wav')
+  playback.play()
   for file_path in file_paths:
     with open(file_path, 'r') as file:
-      os.system('clear')  # Clear screen before displaying content
+      os.system('cls')  # Clear screen before displaying content
       content = file.read()
       print(content)
-      time.sleep(0.0333)  # Pause for 0.333 seconds between files
+      time.sleep(1/fps)  # Pause for 0.333 seconds between files
 
-# Example usage:
+
 directory = os.getcwd()
 sorted_file_list = sort_files_by_number(directory)
 display_file_content(sorted_file_list)

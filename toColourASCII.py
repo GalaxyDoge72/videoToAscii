@@ -26,8 +26,8 @@ for item in files:
 
     img_array = np.array(img)
     ascii_chars = ["@", "#", "$", "%", "*", "+", "-", ".", " "]
-
-
+    os.system('cls')
+    print(f"writing frame {item}")
     
     min_val, max_val = img_array.min(), img_array.max()
     char_range = max_val - min_val
