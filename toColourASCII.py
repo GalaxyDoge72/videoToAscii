@@ -15,14 +15,11 @@ for root, _, filenames in os.walk(directory):
             files.append(os.path.join(root, file))
 
 cols = int(input("How many columns to use: "))
-
+rows = int(input("How many rows to use: "))
 for item in files:
     img = Image.open(item).convert('RGB')
 
-    width, height = img.size
-    aspect_ratio = height / width
-    new_height = int(cols * aspect_ratio)
-    img = img.resize((cols, new_height))
+    img = img.resize((cols, rows))
 
     img_array = np.array(img)
     ascii_chars = ["@", "#", "$", "%", "*", "+", "-", ".", " "]

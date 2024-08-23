@@ -4,6 +4,7 @@ import time
 from just_playback import Playback
 from tkinter import filedialog
 import cv2
+import threading
 playback = Playback()
 def sort_files_by_number(directory):
 
@@ -19,18 +20,23 @@ def sort_files_by_number(directory):
 
   return [f[1] for f in sorted(files)]  # Extract file paths from sorted list
 
+def playAudio():
+  playback.load_file('output.wav')
+  playback.play()
+
 def display_file_content(file_paths):
+  framecount = 0
   video_path = str(filedialog.askopenfilename())
   cap = cv2.VideoCapture(video_path)
   fps = cap.get(cv2.CAP_PROP_FPS)
-  playback.load_file('output.wav')
-  playback.play()
+  totalFrames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+  playAudio()
   for file_path in file_paths:
     with open(file_path, 'r') as file:
-      os.system('cls')  # Clear screen before displaying content
+      os.system("cls")
       content = file.read()
       print(content)
-      time.sleep(1/fps)  # Pause for 0.333 seconds between files
+      time.sleep(1/fps)
 
 
 directory = os.getcwd()
